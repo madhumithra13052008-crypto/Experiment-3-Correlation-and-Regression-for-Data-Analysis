@@ -24,9 +24,90 @@
 
 # Program
 
+# Program
+
+# REG NO : 25013492
+# NAME : MADHUMITHRA.P
+# SLOT NAME : 3P1-1
+
+
+~~~
+import numpy as np 
+import math 
+import matplotlib.pyplot as plt 
+ 
+# input x and y values (space separated), e.g.: 
+# x:  1 2 3 4 5 
+# y:  2 4 3 5 7 
+x = [int(i) for i in input("Enter x values (space separated): ").split()] 
+y = [int(i) for i in input("Enter y values (space separated): ").split()] 
+ 
+if len(x) != len(y): 
+    raise SystemExit("Error: x and y must have the same number of values.") 
+ 
+N = len(x) 
+ 
+# initialize sums 
+Sx = 0 
+Sy = 0 
+Sxy = 0 
+Sx2 = 0 
+Sy2 = 0 
+ 
+# compute sums 
+for i in range(N): 
+    Sx += x[i] 
+    Sy += y[i] 
+    Sxy += x[i] * y[i] 
+    Sx2 += x[i]**2 
+    Sy2 += y[i]**2 
+ 
+# correlation coefficient r 
+den = math.sqrt((N * Sx2 - Sx*2) * (N * Sy2 - Sy*2)) 
+if den == 0: 
+    raise SystemExit("Denominator zero when computing correlation.") 
+r = (N * Sxy - Sx * Sy) / den 
+print("The Correlation coefficient is %0.3f" % r) 
+ 
+# regression coefficient (slope) of Y on X 
+byx = (N * Sxy - Sx * Sy) / (N * Sx2 - Sx**2) 
+ 
+# means 
+xmean = Sx / N 
+ymean = Sy / N 
+ 
+print("The Regression line Y on X is ::: y = %0.3f + %0.3f (x-%0.3f)" % (ymean, byx, 
+xmean)) 
+ 
+# scatter plot of data points 
+plt.scatter(x, y) 
+ 
+# regression function and plot 
+def Reg(xv): 
+    return ymean + byx * (xv - xmean) 
+ 
+x_plot = np.linspace(min(x), max(x), 51) 
+y_plot = Reg(x_plot) 
+plt.plot(x_plot, y_plot, 'r') 
+ 
+plt.xlabel('x-data') 
+plt.ylabel('y-data') 
+plt.legend(['Regression Line', 'Data points']) 
+plt.grid(True) 
+plt.show()
+~~~
+
+# COLLAB LINK:
+
+https://colab.research.google.com/drive/1EU_Uk2aa0Dv-q3ULxgzkj9fOhh6p7oe-?usp=sharing
+
+
 
 
 # Output
+
+<img width="781" height="650" alt="OUTPUT 3" src="https://github.com/user-attachments/assets/d05b8bab-78de-489f-af09-8645e29de756" />
+
 
 
 # Result
